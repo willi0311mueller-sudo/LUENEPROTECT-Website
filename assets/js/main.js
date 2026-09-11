@@ -45,25 +45,39 @@
 
   /* ---------- Scroll-reveal ----------
      [data-reveal] elements render fully visible until this code opts the
-     page into the hide/fade-in animation (`js-reveal` on <html>). A
-     safety-net timeout force-reveals everything regardless, so a missed
-     observer entry or unusual layout can never leave content stuck at
-     opacity:0. */
+     page into the hide/fade-in animation (`js-reveal` on <html>). Two
+     independent mechanisms then reveal each element, whichever fires
+     first:
+       1. IntersectionObserver — the normal path, timed precisely to when
+          the element scrolls into view.
+       2. A scroll-driven catch-up check — for a very large/instant jump
+          in scroll position (a fast flick, "scroll to top/bottom",
+          browser scroll restoration, or anything else that can move the
+          viewport past an element without the browser ever compositing
+          an intermediate frame where it intersected), the observer can
+          miss the crossing entirely. On every scroll event this reveals
+          any element that is already above the viewport's bottom edge —
+          i.e. the user has scrolled to or past it — regardless of
+          whether the observer caught it. This is driven by real scroll
+          position, not a timer, so it never fires early and force-reveals
+          content the user hasn't scrolled to yet. */
   var revealEls = document.querySelectorAll('[data-reveal]');
   if (revealEls.length && !reduceMotion && 'IntersectionObserver' in window) {
     document.documentElement.classList.add('js-reveal');
 
-    var revealAll = function () {
-      revealEls.forEach(function (el) {
-        el.classList.add('is-visible');
-      });
+    var pendingReveal = Array.prototype.slice.call(revealEls);
+
+    var revealEl = function (el) {
+      el.classList.add('is-visible');
+      var idx = pendingReveal.indexOf(el);
+      if (idx !== -1) pendingReveal.splice(idx, 1);
     };
 
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            revealEl(entry.target);
             observer.unobserve(entry.target);
           }
         });
@@ -74,11 +88,19 @@
       observer.observe(el);
     });
 
-    // Safety net: force everything visible after load, in case an element
-    // never intersects (e.g. it's already off the top of a very short page).
-    window.addEventListener('load', function () {
-      setTimeout(revealAll, 1200);
-    });
+    var catchUpOnScroll = function () {
+      if (!pendingReveal.length) return;
+      var viewportBottom = window.innerHeight;
+      // Copy first: revealEl() mutates pendingReveal while we iterate.
+      pendingReveal.slice().forEach(function (el) {
+        if (el.getBoundingClientRect().top < viewportBottom) {
+          observer.unobserve(el);
+          revealEl(el);
+        }
+      });
+    };
+    window.addEventListener('scroll', catchUpOnScroll, { passive: true });
+    catchUpOnScroll(); // also covers content already scrolled past at load
   }
 
   /* ---------- Active nav link on scroll ---------- */

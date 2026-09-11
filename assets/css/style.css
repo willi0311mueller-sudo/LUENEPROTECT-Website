@@ -1400,16 +1400,39 @@ html.nav-open body {
    once main.js confirms it can drive the animation does it add
    `js-reveal` to <html>; from that point [data-reveal] elements start
    hidden and fade in via `.is-visible`, with a safety timeout in main.js
-   that force-reveals anything an observer might miss. */
+   that force-reveals anything an observer might miss.
+
+   The `transition` lives only on the `.is-visible` (revealed) rule, not
+   on the hidden base rule. If it were on the base rule too, adding
+   `js-reveal` at load would itself trigger an animated transition from
+   the default opacity:1 down to 0 — an unwanted fade-to-invisible race
+   against the IntersectionObserver's own fade back to 1, which under
+   fast/rapid scrolling could lose and leave content stuck invisible.
+   With the transition only on `.is-visible`, going hidden is an instant,
+   unanimated snap (imperceptible, happens at load before paint) and the
+   only thing that ever visibly animates is the reveal itself. */
 .js-reveal [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 600ms ease, transform 600ms ease;
 }
 
 .js-reveal [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+/* Product photos (service-detail figures) get their own slightly richer
+   reveal — fade + a gentle zoom-in from 96% instead of the plain
+   slide-up used for text blocks — since these are the images the
+   animation is specifically for. */
+.js-reveal .service-detail__figure[data-reveal] {
+  transform: scale(0.96);
+}
+
+.js-reveal .service-detail__figure[data-reveal].is-visible {
+  transform: scale(1);
+  transition: opacity 700ms ease, transform 700ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
