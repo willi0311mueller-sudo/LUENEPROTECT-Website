@@ -367,11 +367,25 @@ select {
   height: var(--header-h);
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--color-dark-border);
+  transition: box-shadow var(--transition);
+}
+
+/* The frosted-glass fill lives on ::before, not on .site-header itself.
+   backdrop-filter on an element turns it into the containing block for
+   any position:fixed descendant — it was doing that here, so the mobile
+   nav panel (fixed, nested inside the header) sized and positioned
+   itself against this 76px header box instead of the real viewport,
+   making it render squashed into the header area instead of covering
+   the screen. A ::before has no descendants, so it can't do that. */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(20, 17, 15, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-dark-border);
-  transition: background var(--transition), box-shadow var(--transition);
 }
 
 .site-header.is-scrolled {
