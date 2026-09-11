@@ -1,8 +1,11 @@
 /* ==========================================================================
    LÜNE PROTECT — Stylesheet
-   Design system: dark navy "tech/trust" sections on a light, high-contrast
-   content base. Primary = security blue, Accent = CTA amber,
-   Status = armed/protected green. Headings: Lexend / Body: Source Sans 3.
+   Design system taken directly from the company logo: a red-orange house/
+   shield mark + black "PROTECT" wordmark on white. Red = the one brand
+   accent (CTAs, links, active states); near-black = the second brand
+   color, used for dark "trust" sections (hero, footer, CTA banner) and as
+   an alternate solid-button color, echoing the logo's two-tone red/black
+   split. Headings/UI: Lexend, wordmark: Orbitron, body: Source Sans 3.
    ========================================================================== */
 
 /* Google Fonts are loaded via <link> tags in each page's <head>, not via
@@ -13,42 +16,46 @@
 :root {
   --font-heading: 'Lexend', system-ui, -apple-system, Segoe UI, sans-serif;
   --font-body: 'Source Sans 3', system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-brand: 'Orbitron', var(--font-heading);
 
-  /* Light content surfaces */
-  --color-ink: #0f172a;
-  --color-ink-soft: #475569;
-  --color-ink-faint: #7c8aa0;
-  --color-bg: #f6f8fb;
-  --color-bg-alt: #eef2f8;
+  /* Light content surfaces (warm neutrals, matching the logo's white/grey) */
+  --color-ink: #1a1512;
+  --color-ink-soft: #5a5450;
+  --color-ink-faint: #8b8480;
+  --color-bg: #faf9f7;
+  --color-bg-alt: #f2efeb;
   --color-surface: #ffffff;
-  --color-border: #e2e8f0;
+  --color-border: #e7e1da;
 
-  /* Dark navy "trust" surfaces (hero, footer, CTA banner) */
-  --color-navy: #0b1324;
-  --color-navy-soft: #121b30;
-  --color-navy-softer: #182544;
-  --color-navy-border: rgba(255, 255, 255, 0.09);
-  --color-on-navy: #f8fafc;
-  --color-on-navy-soft: #aab8d1;
+  /* Dark "trust" surfaces (hero, footer, CTA banner) — near-black, the
+     logo's second color, not a blue-tinted navy. */
+  --color-dark: #14110f;
+  --color-dark-soft: #211a16;
+  --color-dark-softer: #2c231d;
+  --color-dark-border: rgba(255, 255, 255, 0.1);
+  --color-on-dark: #faf6f3;
+  --color-on-dark-soft: #c9bfb7;
 
-  /* Brand colors */
-  --color-primary: #2563eb;
-  --color-primary-dark: #1d4ed8;
-  --color-primary-soft: rgba(37, 99, 235, 0.1);
-  --color-accent: #f59e0b;
-  --color-accent-dark: #d97706;
-  --color-status: #22c55e;
-  --color-status-soft: rgba(34, 197, 94, 0.14);
-  --color-danger: #dc2626;
+  /* Brand red — sampled from the logo's house mark / "LÜNE" wordmark */
+  --color-red: #e2472a;
+  --color-red-dark: #b7371f;
+  --color-red-soft: rgba(226, 71, 42, 0.1);
+  --color-red-light: #ff8562; /* text/icons on dark surfaces: needs the extra brightness for contrast */
+  --color-red-pale: #ffc4b0; /* small text on translucent-tinted dark chips, where red-light alone falls short */
+
+  /* Small semantic-only accents (not brand identity, kept minimal) */
+  --color-success: #15803d;
+  --color-success-soft: rgba(34, 197, 94, 0.14);
+  --color-danger: #c81e1e;
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 24px;
   --radius-pill: 999px;
 
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.07);
-  --shadow-md: 0 14px 32px -14px rgba(15, 23, 42, 0.22);
-  --shadow-lg: 0 30px 70px -24px rgba(15, 23, 42, 0.32);
+  --shadow-sm: 0 1px 2px rgba(20, 17, 15, 0.07);
+  --shadow-md: 0 14px 32px -14px rgba(20, 17, 15, 0.22);
+  --shadow-lg: 0 30px 70px -24px rgba(20, 17, 15, 0.32);
 
   --container-w: 1220px;
   --transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -139,7 +146,7 @@ select {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-red);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -161,15 +168,15 @@ select {
 }
 
 .section--navy {
-  background: var(--color-navy);
-  color: var(--color-on-navy);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
 }
 
 .section--navy h1,
 .section--navy h2,
 .section--navy h3,
 .section--navy h4 {
-  color: var(--color-on-navy); /* see note on .hero__content h1 */
+  color: var(--color-on-dark); /* see note on .hero__content h1 */
 }
 
 .section-head {
@@ -191,7 +198,7 @@ select {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-red);
   margin-bottom: 14px;
 }
 
@@ -199,18 +206,18 @@ select {
   content: '';
   width: 22px;
   height: 2px;
-  background: var(--color-primary);
+  background: var(--color-red);
   border-radius: 2px;
 }
 
 .section--navy .eyebrow,
 .hero .eyebrow {
-  color: var(--color-accent);
+  color: var(--color-red);
 }
 
 .section--navy .eyebrow::before,
 .hero .eyebrow::before {
-  background: var(--color-accent);
+  background: var(--color-red);
 }
 
 .section-title {
@@ -226,7 +233,7 @@ select {
 }
 
 .section--navy .section-lede {
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
 }
 
 .section-head--center .section-lede {
@@ -249,10 +256,11 @@ select {
   position: absolute;
   top: -60px;
   left: 16px;
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
   padding: 12px 18px;
   border-radius: var(--radius-sm);
+  border: 2px solid var(--color-red);
   z-index: 1000;
   transition: top var(--transition);
   font-weight: 600;
@@ -292,20 +300,23 @@ select {
   transform: translateY(0);
 }
 
+/* Highest emphasis: solid brand red. Dark text — white fails contrast at
+   this button's font size against a red this saturated (≈4.1:1, under the
+   4.5:1 AA text minimum), dark ink clears it comfortably (≈5:1+). */
 .btn--accent {
-  background: var(--color-accent);
-  color: #21160a;
-  box-shadow: 0 14px 28px -12px rgba(245, 158, 11, 0.55);
+  background: var(--color-red);
+  color: var(--color-ink);
+  box-shadow: 0 14px 28px -12px rgba(226, 71, 42, 0.55);
 }
 
 .btn--accent:hover {
-  background: var(--color-accent-dark);
-  box-shadow: 0 18px 34px -12px rgba(217, 119, 6, 0.55);
+  background: var(--color-red-dark);
+  box-shadow: 0 18px 34px -12px rgba(183, 55, 31, 0.55);
 }
 
 .btn--ghost-light {
   background: rgba(255, 255, 255, 0.06);
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
   border-color: rgba(255, 255, 255, 0.28);
 }
 
@@ -314,14 +325,17 @@ select {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
+/* Secondary emphasis: solid near-black, the logo's other brand color —
+   keeps a clear one-two hierarchy against the red accent button instead
+   of the two competing for the same "loudest" role. */
 .btn--primary {
-  background: var(--color-primary);
-  color: #fff;
-  box-shadow: 0 14px 28px -14px rgba(37, 99, 235, 0.6);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  box-shadow: 0 14px 28px -14px rgba(20, 17, 15, 0.5);
 }
 
 .btn--primary:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-dark-soft);
 }
 
 .btn--outline {
@@ -331,8 +345,8 @@ select {
 }
 
 .btn--outline:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--color-red);
+  color: var(--color-red);
 }
 
 .btn--sm {
@@ -352,10 +366,10 @@ select {
   height: var(--header-h);
   display: flex;
   align-items: center;
-  background: rgba(11, 19, 36, 0.85);
+  background: rgba(20, 17, 15, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-navy-border);
+  border-bottom: 1px solid var(--color-dark-border);
   transition: background var(--transition), box-shadow var(--transition);
 }
 
@@ -377,32 +391,51 @@ select {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
 }
 
+/* Holds the actual two-color logo icon (red house + black smart-lock), so
+   it's a plain light card rather than a single-color tinted badge. */
 .brand__mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 11px;
-  background: linear-gradient(150deg, var(--color-primary), #1e3a8a);
-  color: #fff;
-  box-shadow: 0 8px 20px -8px rgba(37, 99, 235, 0.7);
+  background: var(--color-surface);
+  padding: 5px;
+  box-shadow: 0 8px 20px -8px rgba(20, 17, 15, 0.45);
 }
 
 .brand__mark svg {
-  width: 21px;
-  height: 21px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Two-color logo icon: house outline in brand red, smart-lock glyph in
+   near-black, matching the actual company logo's color split. */
+.brand__mark .logo-red {
+  stroke: var(--color-red);
+}
+
+.brand__mark .logo-black {
+  stroke: var(--color-ink);
+  fill: var(--color-ink);
+}
+
+.brand__mark .logo-cutout {
+  fill: var(--color-surface);
 }
 
 .brand__name {
-  letter-spacing: 0.01em;
+  font-family: var(--font-brand);
+  letter-spacing: 0.03em;
+  font-weight: 700;
 }
 
 .brand__name span {
-  color: var(--color-accent);
+  color: var(--color-red);
 }
 
 .main-nav {
@@ -420,7 +453,7 @@ select {
 .main-nav__list a {
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
   padding-block: 6px;
   border-bottom: 2px solid transparent;
   transition: color var(--transition), border-color var(--transition);
@@ -428,8 +461,8 @@ select {
 
 .main-nav__list a:hover,
 .main-nav__list a.is-active {
-  color: var(--color-on-navy);
-  border-color: var(--color-accent);
+  color: var(--color-on-dark);
+  border-color: var(--color-red);
 }
 
 .main-nav__cta {
@@ -446,7 +479,7 @@ select {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.92rem;
@@ -457,19 +490,19 @@ select {
 .phone-pill svg {
   width: 17px;
   height: 17px;
-  color: var(--color-status);
+  color: var(--color-red-light);
 }
 
 .nav-toggle {
   display: none;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--color-navy-border);
+  border: 1px solid var(--color-dark-border);
   border-radius: var(--radius-sm);
   width: 44px;
   height: 44px;
   align-items: center;
   justify-content: center;
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
 }
 
 .nav-toggle svg {
@@ -492,10 +525,10 @@ select {
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  background: radial-gradient(circle at 82% 15%, rgba(37, 99, 235, 0.35), transparent 55%),
-    radial-gradient(circle at 12% 85%, rgba(245, 158, 11, 0.16), transparent 45%),
-    linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy-soft) 100%);
-  color: var(--color-on-navy);
+  background: radial-gradient(circle at 82% 15%, rgba(226, 71, 42, 0.32), transparent 55%),
+    radial-gradient(circle at 12% 85%, rgba(226, 71, 42, 0.14), transparent 45%),
+    linear-gradient(180deg, var(--color-dark) 0%, var(--color-dark-soft) 100%);
+  color: var(--color-on-dark);
   overflow: hidden;
   padding-block: clamp(64px, 10vw, 120px);
 }
@@ -524,20 +557,20 @@ select {
      out-prioritizes a rule that targets the element directly, regardless
      of the ancestor rule's specificity) — so every heading placed on a
      dark surface needs its light color restated explicitly here. */
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
   font-size: clamp(2.2rem, 4.6vw, 3.4rem);
   font-weight: 800;
 }
 
 .hero__content h1 em {
   font-style: normal;
-  color: var(--color-accent);
+  color: var(--color-red);
 }
 
 .hero__lede {
   margin-top: 20px;
   font-size: 1.12rem;
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
   max-width: 54ch;
 }
 
@@ -554,7 +587,7 @@ select {
   gap: 12px 22px;
   margin-top: 42px;
   padding-top: 30px;
-  border-top: 1px solid var(--color-navy-border);
+  border-top: 1px solid var(--color-dark-border);
 }
 
 .hero__trust li {
@@ -562,13 +595,13 @@ select {
   align-items: center;
   gap: 10px;
   font-size: 0.92rem;
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
 }
 
 .hero__trust svg {
   width: 19px;
   height: 19px;
-  color: var(--color-status);
+  color: var(--color-red-light);
   flex-shrink: 0;
 }
 
@@ -584,8 +617,8 @@ select {
   width: 100%;
   max-width: 400px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(165deg, var(--color-navy-softer), var(--color-navy-soft));
-  border: 1px solid var(--color-navy-border);
+  background: linear-gradient(165deg, var(--color-dark-softer), var(--color-dark-soft));
+  border: 1px solid var(--color-dark-border);
   padding: 30px;
   box-shadow: var(--shadow-lg);
 }
@@ -597,12 +630,19 @@ select {
   margin-bottom: 22px;
 }
 
+/* "Armed" status reads as brand red rather than the conventional
+   safe/active green — deliberately, to match how physical alarm keypads
+   use red for "scharf" and to keep the brand's one accent color
+   consistent. The text uses --color-red-pale rather than --color-red or
+   --color-red-light: against this translucent-tinted dark chip the
+   deeper reds fall short of 4.5:1 for text this small, the pale tint
+   clears it. */
 .status-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--color-status-soft);
-  color: var(--color-status);
+  background: rgba(226, 71, 42, 0.16);
+  color: var(--color-red-pale);
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.78rem;
@@ -616,13 +656,13 @@ select {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-status);
-  box-shadow: 0 0 0 4px var(--color-status-soft);
+  background: var(--color-red-light);
+  box-shadow: 0 0 0 4px rgba(226, 71, 42, 0.25);
 }
 
 .hero__panel-time {
   font-size: 0.8rem;
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
 }
 
 .hero__panel-list {
@@ -636,7 +676,7 @@ select {
   align-items: center;
   gap: 12px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--color-navy-border);
+  border: 1px solid var(--color-dark-border);
   border-radius: var(--radius-md);
   padding: 12px 14px;
 }
@@ -648,8 +688,8 @@ select {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: rgba(37, 99, 235, 0.22);
-  color: #a9c2fb;
+  background: rgba(226, 71, 42, 0.22);
+  color: var(--color-red-light);
   flex-shrink: 0;
 }
 
@@ -666,7 +706,7 @@ select {
 }
 
 .hero__panel-item div small {
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
   font-size: 0.78rem;
 }
 
@@ -675,7 +715,7 @@ select {
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.45), transparent 70%);
+  background: radial-gradient(circle, rgba(226, 71, 42, 0.5), transparent 70%);
   filter: blur(10px);
   z-index: -1;
   top: -60px;
@@ -725,7 +765,7 @@ select {
 .partner-badge svg {
   width: 16px;
   height: 16px;
-  color: var(--color-primary);
+  color: var(--color-red);
 }
 
 /* ---------- Services overview grid ---------- */
@@ -759,8 +799,8 @@ select {
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
+  background: var(--color-red-soft);
+  color: var(--color-red);
 }
 
 .service-card__icon svg {
@@ -785,7 +825,7 @@ select {
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--color-primary);
+  color: var(--color-red);
 }
 
 .service-card__link svg {
@@ -818,6 +858,9 @@ select {
   direction: ltr;
 }
 
+/* Solid black rather than red: with the service-card icons above already
+   red-tinted, alternating to the logo's other brand color here keeps the
+   red from being the only note played down the whole page. */
 .service-detail__badge {
   display: inline-flex;
   align-items: center;
@@ -825,8 +868,8 @@ select {
   width: 54px;
   height: 54px;
   border-radius: var(--radius-md);
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
   margin-bottom: 20px;
 }
 
@@ -853,7 +896,7 @@ select {
 .feature-list svg {
   width: 20px;
   height: 20px;
-  color: var(--color-status);
+  color: var(--color-red);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -866,7 +909,7 @@ select {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: linear-gradient(160deg, var(--color-navy-soft), var(--color-navy));
+  background: linear-gradient(160deg, var(--color-dark-soft), var(--color-dark));
   aspect-ratio: 4 / 3.3;
   display: flex;
   align-items: center;
@@ -884,7 +927,7 @@ select {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(245, 158, 11, 0.22), transparent 55%);
+  background: radial-gradient(circle at 30% 20%, rgba(226, 71, 42, 0.25), transparent 55%);
 }
 
 .service-detail__cta {
@@ -913,8 +956,8 @@ select {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.85rem;
-  color: var(--color-primary);
-  background: var(--color-primary-soft);
+  color: var(--color-red);
+  background: var(--color-red-soft);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -970,7 +1013,7 @@ select {
   font-family: var(--font-heading);
   font-size: 1.7rem;
   font-weight: 800;
-  color: var(--color-primary);
+  color: var(--color-red);
 }
 
 .stat span {
@@ -981,9 +1024,9 @@ select {
 .about-figure {
   position: relative;
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--color-navy-soft), var(--color-navy));
+  background: linear-gradient(160deg, var(--color-dark-soft), var(--color-dark));
   padding: 36px;
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
   border: 1px solid var(--color-border);
 }
 
@@ -1000,20 +1043,21 @@ select {
   gap: 12px;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid var(--color-navy-border);
+  border-top: 1px solid var(--color-dark-border);
 }
 
 .about-figure__avatar {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--color-red);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
   font-weight: 700;
-  color: #fff;
+  /* dark ink, not white — see the .btn--accent note on text contrast against this red */
+  color: var(--color-ink);
 }
 
 .about-figure__person strong {
@@ -1022,7 +1066,7 @@ select {
 }
 
 .about-figure__person small {
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
   font-size: 0.8rem;
 }
 
@@ -1067,8 +1111,8 @@ select {
 
 /* ---------- CTA banner ---------- */
 .cta-banner {
-  background: linear-gradient(120deg, var(--color-navy), #17264a);
-  color: var(--color-on-navy);
+  background: linear-gradient(120deg, var(--color-dark), var(--color-dark-softer));
+  color: var(--color-on-dark);
   border-radius: var(--radius-lg);
   padding: clamp(36px, 6vw, 56px);
   display: flex;
@@ -1079,13 +1123,13 @@ select {
 }
 
 .cta-banner h2 {
-  color: var(--color-on-navy); /* see note on .hero__content h1 */
+  color: var(--color-on-dark); /* see note on .hero__content h1 */
   font-size: clamp(1.5rem, 2.8vw, 2rem);
   max-width: 24ch;
 }
 
 .cta-banner p {
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
   margin-top: 10px;
   max-width: 46ch;
 }
@@ -1146,8 +1190,8 @@ select {
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px var(--color-primary-soft);
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 4px var(--color-red-soft);
   outline: none;
 }
 
@@ -1169,7 +1213,7 @@ select {
   margin-top: 3px;
   width: 17px;
   height: 17px;
-  accent-color: var(--color-primary);
+  accent-color: var(--color-red);
   flex-shrink: 0;
 }
 
@@ -1188,15 +1232,18 @@ select {
   display: none;
 }
 
+/* Success/error keep the conventional green/red semantic colors, kept
+   separate from the brand red so a form outcome is never mistaken for
+   brand styling. */
 .form-status.is-success {
   display: block;
-  background: var(--color-status-soft);
-  color: #15803d;
+  background: var(--color-success-soft);
+  color: var(--color-success);
 }
 
 .form-status.is-error {
   display: block;
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(200, 30, 30, 0.1);
   color: var(--color-danger);
 }
 
@@ -1223,8 +1270,8 @@ select {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-md);
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
+  background: var(--color-red-soft);
+  color: var(--color-red);
   flex-shrink: 0;
 }
 
@@ -1245,32 +1292,32 @@ select {
 }
 
 .info-card a:hover {
-  color: var(--color-primary);
+  color: var(--color-red);
 }
 
 .info-card--dark {
-  background: linear-gradient(160deg, var(--color-navy-soft), var(--color-navy));
+  background: linear-gradient(160deg, var(--color-dark-soft), var(--color-dark));
   border-color: transparent;
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
 }
 
 .info-card--dark .info-card__icon {
-  background: rgba(245, 158, 11, 0.2);
-  color: var(--color-accent);
+  background: rgba(226, 71, 42, 0.22);
+  color: var(--color-red-light);
 }
 
 .info-card--dark h3 {
-  color: var(--color-on-navy); /* see note on .hero__content h1 */
+  color: var(--color-on-dark); /* see note on .hero__content h1 */
 }
 
 .info-card--dark p {
-  color: var(--color-on-navy-soft);
+  color: var(--color-on-dark-soft);
 }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: var(--color-navy);
-  color: var(--color-on-navy-soft);
+  background: var(--color-dark);
+  color: var(--color-on-dark-soft);
   padding-block: 56px 28px;
 }
 
@@ -1281,7 +1328,7 @@ select {
 }
 
 .footer-brand .brand {
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
 }
 
 .footer-brand p {
@@ -1290,12 +1337,23 @@ select {
   max-width: 34ch;
 }
 
+/* Echoes the small letter-spaced tagline under the logo's wordmark. */
+.footer-brand__tagline {
+  margin-top: 10px !important;
+  font-family: var(--font-heading);
+  font-size: 0.72rem !important;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-soft);
+}
+
 .footer-col h4 {
   font-family: var(--font-heading);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
   margin-bottom: 16px;
 }
 
@@ -1311,13 +1369,13 @@ select {
 }
 
 .footer-col a:hover {
-  color: var(--color-on-navy);
+  color: var(--color-on-dark);
 }
 
 .footer-bottom {
   margin-top: 46px;
   padding-top: 22px;
-  border-top: 1px solid var(--color-navy-border);
+  border-top: 1px solid var(--color-dark-border);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1400,15 +1458,17 @@ select {
 }
 
 .legal a {
-  color: var(--color-primary);
+  color: var(--color-red);
   text-decoration: underline;
 }
 
+/* Deliberately amber, not brand red — these flag unverified content for
+   the site owner and should never read as a styled brand/CTA element. */
 .placeholder-note {
   display: inline-block;
-  background: rgba(245, 158, 11, 0.14);
+  background: rgba(217, 119, 6, 0.14);
   color: #92400e;
-  border: 1px dashed var(--color-accent-dark);
+  border: 1px dashed #b45309;
   border-radius: var(--radius-sm);
   padding: 1px 8px;
   font-size: 0.85em;
@@ -1462,7 +1522,7 @@ select {
   .main-nav {
     position: fixed;
     inset: var(--header-h) 0 0 0;
-    background: var(--color-navy);
+    background: var(--color-dark);
     flex-direction: column;
     align-items: stretch;
     padding: 28px 24px;
@@ -1486,7 +1546,7 @@ select {
     display: block;
     width: 100%;
     padding: 14px 4px;
-    border-bottom: 1px solid var(--color-navy-border);
+    border-bottom: 1px solid var(--color-dark-border);
   }
 
   .header-actions .phone-pill span {
