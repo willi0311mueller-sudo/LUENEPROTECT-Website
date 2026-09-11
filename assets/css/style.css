@@ -509,6 +509,19 @@ select {
   display: block;
 }
 
+/* Lock the background page while the mobile nav is open. `.nav-open` is
+   set on <html> — this page's actual scrolling element — not <body>;
+   overflow:hidden on body alone does not stop html from scrolling.
+   Without this, the page behind the fixed nav panel stays scrollable,
+   which on phones (iOS Safari especially) can make a "fixed" panel
+   appear to jump or vanish mid-scroll as the address bar shows/hides and
+   the viewport resizes. Locking both html and body is belt-and-suspenders
+   across browser quirks. */
+html.nav-open,
+html.nav-open body {
+  overflow: hidden;
+}
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
@@ -1499,7 +1512,8 @@ select {
 
   .about-grid,
   .area-grid,
-  .contact-grid {
+  .contact-grid,
+  .service-detail__grid {
     grid-template-columns: 1fr;
   }
 

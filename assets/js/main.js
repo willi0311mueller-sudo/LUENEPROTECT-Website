@@ -11,17 +11,23 @@
 
   /* ---------- Mobile navigation ---------- */
   var navToggle = document.querySelector('[data-nav-toggle]');
-  var body = document.body;
+  // The 'nav-open' class (which also locks background scroll — see CSS)
+  // goes on <html>, not <body>: <html> is this page's actual scrolling
+  // element (standards mode), so an overflow:hidden on <body> alone
+  // doesn't stop it — the background stays scrollable behind the fixed
+  // mobile-nav panel, which on phones (iOS Safari especially) is exactly
+  // what makes a "fixed" panel jump or vanish mid-scroll.
+  var htmlEl = document.documentElement;
 
   if (navToggle) {
     navToggle.addEventListener('click', function () {
-      var isOpen = body.classList.toggle('nav-open');
+      var isOpen = htmlEl.classList.toggle('nav-open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
     document.querySelectorAll('.main-nav a').forEach(function (link) {
       link.addEventListener('click', function () {
-        body.classList.remove('nav-open');
+        htmlEl.classList.remove('nav-open');
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
