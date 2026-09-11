@@ -937,6 +937,15 @@ html.nav-open body {
   color: rgba(255, 255, 255, 0.92);
 }
 
+.service-detail__figure img {
+  position: relative; /* stacks above the ::after glow instead of under its tint */
+  z-index: 1;
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.5));
+}
+
 .service-detail__figure::after {
   content: '';
   position: absolute;
