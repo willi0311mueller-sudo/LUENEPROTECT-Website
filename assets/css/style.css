@@ -1049,15 +1049,10 @@ html.nav-open body {
 .about-figure__avatar {
   width: 46px;
   height: 46px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: var(--color-red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  /* white, not dark ink — see the .btn--accent note on text contrast against this red */
-  color: var(--color-on-dark);
+  object-fit: cover;
+  border: 2px solid var(--color-red);
 }
 
 .about-figure__person strong {
