@@ -1006,11 +1006,12 @@ html.nav-open body {
 }
 
 .stat {
-  padding: 20px 18px;
+  padding: 20px 14px;
   border-radius: var(--radius-md);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   text-align: center;
+  min-width: 0; /* lets a grid item actually shrink below its content's natural width */
 }
 
 .stat strong {
@@ -1022,8 +1023,11 @@ html.nav-open body {
 }
 
 .stat span {
+  display: block;
   font-size: 0.82rem;
   color: var(--color-ink-soft);
+  hyphens: auto; /* proper German syllable breaks (Tech­no­lo­gie­part­ner) for the page's lang="de" */
+  overflow-wrap: anywhere; /* fallback for a run with no hyphenation point at all */
 }
 
 .about-figure {
