@@ -919,38 +919,20 @@ html.nav-open body {
   color: var(--color-ink);
 }
 
+/* No card/background behind the product photo — it floats directly on
+   the section's own background, using its own transparency. */
 .service-detail__figure {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: linear-gradient(160deg, var(--color-dark-soft), var(--color-dark));
   aspect-ratio: 4 / 3.3;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-border);
-}
-
-.service-detail__figure svg {
-  width: 58%;
-  height: 58%;
-  color: rgba(255, 255, 255, 0.92);
 }
 
 .service-detail__figure img {
-  position: relative; /* stacks above the ::after glow instead of under its tint */
-  z-index: 1;
-  width: 68%;
-  height: 68%;
+  width: 82%;
+  height: 82%;
   object-fit: contain;
-  filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.5));
-}
-
-.service-detail__figure::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(208, 59, 31, 0.25), transparent 55%);
+  filter: drop-shadow(0 24px 32px rgba(20, 17, 15, 0.22));
 }
 
 .service-detail__cta {
